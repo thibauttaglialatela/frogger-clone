@@ -1,0 +1,41 @@
+body {
+    background-color: #FFE0B5;
+    color: #404040;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.grid {
+    border: solid 1px #BFBFBF;
+    width: 180px;
+    height:180px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid div {
+    width: 20px;
+    height: 20px;
+}
+
+.ending-block {
+    background-color: #A63D40;
+}
+
+.starting-block {
+    background-color: #4DAA57;
+}
+
+.log-left, .log-right {
+    background-color: #00008a;
+}
+
+.car-left,
+.car-right {
+    background-color: lightgrey;
+}
+
