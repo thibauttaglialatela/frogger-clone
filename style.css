@@ -28,7 +28,7 @@ h1 {
 }
 
 .starting-block {
-    background-color: #4DAA57;
+    background-color: #aa4d71;
 }
 
 .log-left, .log-right {
@@ -40,3 +40,6 @@ h1 {
     background-color: lightgrey;
 }
 
+.frog {
+    background-color: greenyellow;
+}
