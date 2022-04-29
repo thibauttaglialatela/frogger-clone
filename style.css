@@ -24,22 +24,31 @@ h1 {
 }
 
 .ending-block {
-    background-color: #A63D40;
+    background-color: #ac257d;
 }
 
 .starting-block {
     background-color: #aa4d71;
 }
 
-.log-left, .log-right {
-    background-color: #00008a;
-}
 
-.car-left,
-.car-right {
-    background-color: lightgrey;
-}
 
 .frog {
     background-color: greenyellow;
+}
+
+.l1, .l2, .l3 {
+    background-color: brown;
+}
+
+.l4, .l5 {
+    background-color: #00008a;
+}
+
+.c1, .c2 {
+    background-color: crimson;
+}
+
+.c3, .c4, .c5 {
+    background-color: lightgrey;
 }
