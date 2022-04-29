@@ -10,6 +10,9 @@ const carsLeft = document.querySelectorAll(".car-left");
 const CarsRight = document.querySelectorAll(".car-right");
 let currentIndex = 76; //index correspondant à starting block
 const width = 9;
+let timerCarId;
+let timerLogId;
+let animate = false;
 
 function moveFrog(event) {
   try {
@@ -37,7 +40,7 @@ function moveFrog(event) {
   }
 }
 
-document.addEventListener("keyup", moveFrog);
+
 
 function autoMoveLogs() {
   logsLeft.forEach((logLeft) => moveLogLeft(logLeft));
@@ -47,6 +50,7 @@ function autoMoveLogs() {
 function autoMoveCars() {
   carsLeft.forEach((carLeft) => moveCarLeft(carLeft));
   CarsRight.forEach((carRight) => moveCarRight(carRight));
+  lose();
 }
 
 const moveLogLeft = (logLeft) => {
@@ -149,5 +153,33 @@ function moveCarRight(carRight) {
   }
 }
 
-setInterval(autoMoveLogs, 1000);
-setInterval(autoMoveCars, 700);
+function lose() {
+  if (squares[currentIndex].classList.contains('c1') || squares[currentIndex].classList.contains('c2')) {
+    resultDisplay.innerHTML = "Game Over";
+    clearInterval(timerCarId);
+    squares[currentIndex].classList.remove('frog');
+    document.removeEventListener('keyup', moveFrog);
+  }
+  if (squares[currentIndex].classList.contains('l4') || squares[currentIndex].classList.contains('l5')) {
+    resultDisplay.innerHTML = "Game Over";
+    clearInterval(timerLogId);
+    squares[currentIndex].classList.remove('frog');
+    document.removeEventListener('keyup', moveFrog);
+  }
+}
+
+startPauseButton.addEventListener('click', () => {
+  if (animate == false) {
+    animate = true;
+    document.addEventListener("keyup", moveFrog);
+    timerLogId = setInterval(autoMoveLogs, 1000);
+    timerCarId = setInterval(autoMoveCars, 700);
+  } else {
+    animate = false;
+    clearInterval(timerCarId);
+    clearInterval(timerLogId);
+    document.removeEventListener('keyup', moveFrog);
+  }
+})
+
+
