@@ -34,7 +34,7 @@ h1 {
 
 
 .frog {
-    background-color: greenyellow;
+    background-color: greenyellow !important;
 }
 
 .l1, .l2, .l3 {
