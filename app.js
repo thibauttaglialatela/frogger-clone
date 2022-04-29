@@ -5,6 +5,9 @@ const squares = document.querySelectorAll(".grid div");
 console.log(squares);
 const logsLeft = document.querySelectorAll(".log-left");
 const logsRight = document.querySelectorAll(".log-right");
+
+const carsLeft = document.querySelectorAll(".car-left");
+const CarsRight = document.querySelectorAll(".car-right");
 let currentIndex = 76; //index correspondant à starting block
 const width = 9;
 
@@ -39,6 +42,11 @@ document.addEventListener("keyup", moveFrog);
 function autoMoveLogs() {
   logsLeft.forEach((logLeft) => moveLogLeft(logLeft));
   logsRight.forEach((logRight) => moveLogRight(logRight));
+}
+
+function autoMoveCars() {
+  carsLeft.forEach((carLeft) => moveCarLeft(carLeft));
+  CarsRight.forEach((carRight) => moveCarRight(carRight));
 }
 
 const moveLogLeft = (logLeft) => {
@@ -91,4 +99,55 @@ function moveLogRight(logRight) {
   }
 }
 
+function moveCarLeft(carLeft) {
+  switch (true) {
+    case carLeft.classList.contains("c1"):
+      carLeft.classList.remove("c1");
+      carLeft.classList.add("c5");
+      break;
+    case carLeft.classList.contains("c5"):
+      carLeft.classList.remove("c5");
+      carLeft.classList.add("c4");
+      break;
+    case carLeft.classList.contains("c4"):
+      carLeft.classList.remove("c4");
+      carLeft.classList.add("c3");
+      break;
+    case carLeft.classList.contains("c3"):
+      carLeft.classList.remove("c3");
+      carLeft.classList.add("c2");
+      break;
+    case carLeft.classList.contains("c2"):
+      carLeft.classList.remove("c2");
+      carLeft.classList.add("c1");
+      break;
+  }
+}
+
+function moveCarRight(carRight) {
+  switch (true) {
+    case carRight.classList.contains("c1"):
+      carRight.classList.remove("c1");
+      carRight.classList.add("c2");
+      break;
+    case carRight.classList.contains("c2"):
+      carRight.classList.remove("c2");
+      carRight.classList.add("c3");
+      break;
+    case carRight.classList.contains("c3"):
+      carRight.classList.remove("c3");
+      carRight.classList.add("c4");
+      break;
+    case carRight.classList.contains("c4"):
+      carRight.classList.remove("c4");
+      carRight.classList.add("c5");
+      break;
+    case carRight.classList.contains("c5"):
+      carRight.classList.remove("c5");
+      carRight.classList.add("c1");
+      break;
+  }
+}
+
 setInterval(autoMoveLogs, 1000);
+setInterval(autoMoveCars, 700);
