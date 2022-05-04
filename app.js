@@ -13,6 +13,8 @@ const width = 9;
 let timerCarId;
 let timerLogId;
 let animate = false;
+let currentTime = 20;
+timeLefDisplay.innerHTML = currentTime;
 
 function moveFrog(event) {
   try {
@@ -40,17 +42,22 @@ function moveFrog(event) {
   }
 }
 
-
-
 function autoMoveLogs() {
+  currentTime--;
+  timeLefDisplay.textContent = currentTime;
   logsLeft.forEach((logLeft) => moveLogLeft(logLeft));
   logsRight.forEach((logRight) => moveLogRight(logRight));
+  lose();
+  win();
 }
 
 function autoMoveCars() {
+  currentTime--;
+  timeLefDisplay.textContent = currentTime;
   carsLeft.forEach((carLeft) => moveCarLeft(carLeft));
   CarsRight.forEach((carRight) => moveCarRight(carRight));
   lose();
+  win();
 }
 
 const moveLogLeft = (logLeft) => {
@@ -154,32 +161,48 @@ function moveCarRight(carRight) {
 }
 
 function lose() {
-  if (squares[currentIndex].classList.contains('c1') || squares[currentIndex].classList.contains('c2')) {
+  if (
+    squares[currentIndex].classList.contains("c1") ||
+    squares[currentIndex].classList.contains("c2") ||
+    currentTime === 0
+  ) {
     resultDisplay.innerHTML = "Game Over";
     clearInterval(timerCarId);
-    squares[currentIndex].classList.remove('frog');
-    document.removeEventListener('keyup', moveFrog);
+    currentTime = 0;
+    squares[currentIndex].classList.remove("frog");
+    document.removeEventListener("keyup", moveFrog);
   }
-  if (squares[currentIndex].classList.contains('l4') || squares[currentIndex].classList.contains('l5')) {
+  if (
+    squares[currentIndex].classList.contains("l4") ||
+    squares[currentIndex].classList.contains("l5")
+  ) {
     resultDisplay.innerHTML = "Game Over";
     clearInterval(timerLogId);
-    squares[currentIndex].classList.remove('frog');
-    document.removeEventListener('keyup', moveFrog);
+    currentTime = 0;
+    squares[currentIndex].classList.remove("frog");
+    document.removeEventListener("keyup", moveFrog);
   }
 }
 
-startPauseButton.addEventListener('click', () => {
+function win() {
+  if (squares[currentIndex].classList.contains("ending-block")) {
+    resultDisplay.innerHTML = "You win";
+    clearInterval(timerCarId);
+    clearInterval(timerLogId);
+    document.removeEventListener("keyup", moveFrog);
+  }
+}
+
+startPauseButton.addEventListener("click", () => {
   if (animate == false) {
     animate = true;
     document.addEventListener("keyup", moveFrog);
     timerLogId = setInterval(autoMoveLogs, 1000);
-    timerCarId = setInterval(autoMoveCars, 700);
+    timerCarId = setInterval(autoMoveCars, 1300);
   } else {
     animate = false;
     clearInterval(timerCarId);
     clearInterval(timerLogId);
-    document.removeEventListener('keyup', moveFrog);
+    document.removeEventListener("keyup", moveFrog);
   }
-})
-
-
+});
